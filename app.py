@@ -57,7 +57,7 @@ def index():
             <h3>KHATAMAN AL QUR'AN Alumni Haji th 2023</h3>
 
             <pre id="textToCopy">
-One Week One JUZ PERIODE {periode_sekarang}
+One Week One JUZ *PERIODE {periode_sekarang}*
 
 KHATAMAN AL QUR'AN _Alumni Haji th 2023_
 
