@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: hataman
+    env: python
+    buildCommand: ""
+    startCommand: "gunicorn app:app"
+    repo: https://github.com/harisaryono/hataman.git
+    branch: main
+
