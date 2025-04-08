@@ -1,5 +1,7 @@
-from flask import Flask, render_template_string
+from flask import Flask, render_template_string,request, render_template
 from datetime import datetime, timedelta
+import re
+
 
 app = Flask(__name__)
 
@@ -92,6 +94,39 @@ Amiin 3x 🤲 Yaa Mujiibassaailiin
     </html>
     """
     return html_template
+
+def proses_khataman(teks):
+    semua_juz = set(range(1, 31))  # Semua juz dari 1-30
+    juz_sudah = set()
+
+    # Cari semua baris yang berisi "Juz xx."
+    for line in teks.split("\n"):
+        match = re.search(r'Juz (\d+)\.', line)
+        if match:
+            juz_num = int(match.group(1))  # Ambil nomor juz
+            
+            # Jika ada tanda 🕋 di akhir, anggap juz sudah dibaca
+            if "🕋" in line:
+                juz_sudah.add(juz_num)
+
+    # Hitung juz yang belum dibaca
+    juz_belum = semua_juz - juz_sudah
+
+    return {
+        "sudah_dibaca": sorted(juz_sudah),
+        "belum_dibaca": sorted(juz_belum),
+        "jumlah_sudah": len(juz_sudah),
+        "jumlah_belum": len(juz_belum)
+    }
+
+@app.route("/hitung", methods=["GET", "POST"])
+def hitung():
+    hasil = {}
+    if request.method == "POST":
+        teks = request.form.get("textarea_khataman", "")
+        hasil = proses_khataman(teks)
+    
+    return render_template("hitung.html", hasil=hasil)
 
 if __name__ == "__main__":
     app.run(debug=True)

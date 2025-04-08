@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khataman Al-Qur'an</title>
+</head>
+<body>
+    <h2>Khataman Al-Qur'an</h2>
+    <form method="post">
+        <textarea name="textarea_khataman" rows="10" cols="50"></textarea><br>
+        <button type="submit">Proses</button>
+    </form>
+
+    {% if hasil %}
+        <h3>#CekPoint</h3>
+        <p><b>Juz sudah dibaca:</b> {{ hasil.jumlah_sudah }}</p>
+        <p><b>Juz belum dibaca:</b> {{ hasil.belum_dibaca }}</p>
+        <p><b>Jumlah belum dibaca:</b> {{ hasil.jumlah_belum }}</p>
+    {% endif %}
+</body>
+</html>
+

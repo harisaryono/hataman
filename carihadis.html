@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>Pencarian Hadis Pribadi</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background: #f9f9f9;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1.2rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    button {
+      padding: 0.8rem 1.2rem;
+      font-size: 1rem;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1 style="text-align:center">🔍 Pencarian Hadis Sunnah One</h1>
+  <input type="text" id="queryInput" placeholder="Masukkan teks Arab hadis, misal: يا معاذ أتدري ما حق الله على العباد وما حق العباد على الله">
+  <button onclick="searchHadis()">Cari Hadis</button>
+  <iframe id="resultFrame" src="https://sunnah.one/search"></iframe>
+
+  <script>
+    function searchHadis() {
+      const input = document.getElementById('queryInput').value;
+      const encoded = encodeURIComponent('"' + input + '"'); // exact match
+      const url = `https://sunnah.one/search?q=${encoded}`;
+      document.getElementById('resultFrame').src = url;
+    }
+  </script>
+</body>
+</html>
+
